@@ -1,0 +1,25 @@
+query getAllAbandonedCarts {
+  checkouts(first: 10) {
+    edges {
+      node {
+        id
+        user {
+          id
+          email
+        }
+        created
+        lines {
+          variant {
+            product {
+              name
+              thumbnail {
+                url
+                alt
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
