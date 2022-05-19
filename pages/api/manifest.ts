@@ -36,24 +36,24 @@ const inferWebhooks = async (baseURL: string) => {
 
 const handler: NextApiHandler = async (request, response) => {
   const baseURL = getBaseURL(request);
-
   const webhooks = await inferWebhooks(baseURL);
 
   const manifest = {
     id: "saleor.app",
     version: version,
-    appUrl: "https://metal-experts-fix-159-255-181-88.loca.lt/extensions",
+    appUrl: `${baseURL}/configuration`,
     name: name,
-    permissions: ["MANAGE_CHECKOUT"],
+    permissions: ["MANAGE_CHECKOUTS", "HANDLE_CHECKOUTS"],
     configurationUrl: `${baseURL}/configuration`,
     tokenTargetUrl: `${baseURL}/api/register`,
     webhooks,
     extensions: [
       {
-        label: "Carts",
+        label: "Show Abandoned Carts",
         mount: "NAVIGATION_ORDERS",
         target: "APP_PAGE",
-        url: "/extensions",
+        permissions: ["MANAGE_ORDERS"],
+        url: `/`,
       },
     ],
   };
